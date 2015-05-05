@@ -15,8 +15,6 @@ using namespace std;
 #define rrep(i,n) for (int i = n-1; i >= 0; --i)
 
 typedef long long ll;
-const ll mod=1000000007;
-const int N = 1000010;
 
 void solve() {
 
