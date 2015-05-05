@@ -5,6 +5,7 @@
 #include <set>
 #include <algorithm>
 #include <cstdio>
+#include <cmath>
 #include <cstring>
 #include <cstdlib>
 #include <utility>
@@ -15,6 +16,7 @@ using namespace std;
 #define rrep(i,n) for (int i = n-1; i >= 0; --i)
 
 typedef long long ll;
+const double eps = 1e-9;
 
 void solve() {
 
