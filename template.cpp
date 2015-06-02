@@ -18,6 +18,26 @@ using namespace std;
 typedef long long ll;
 const double eps = 1e-9;
 
+/*
+int head[ MAXN + 1] = {0};	// 表示头指针，初始化为0
+int p[ MAXM + 1];		// 表示指向的节点
+int next[ MAXM + 1] = {0}; 	// 模拟指针，初始化为0
+int edgecnt = 0;			// 记录边的数量
+
+void addedge(int u, int v) {	// 添加边(u,v)
+	++edgecnt;
+	p[ edgecnt ] = v;
+	next[ edgecnt ] = head[u];
+	head[u] = edgecnt;
+}
+
+// 枚举边的过程，u为起始点
+for (int i = head[u]; i; i = next[i]) {
+	v = p[i];
+	...
+}
+*/
+
 void solve() {
 
 }
