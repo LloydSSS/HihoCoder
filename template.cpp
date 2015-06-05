@@ -25,32 +25,51 @@ const int L = 1e2+7;
 
 /*
 // Graph
-int head[ N + 1] = {0};	// 表示头指针，初始化为0
-int p[ M + 1];		// 表示指向的节点
-int next[ M + 1] = {0}; 	// 模拟指针，初始化为0
-int edgecnt = 0;			// 记录边的数量
+struct graphedge {
+    int to;         // 表示指向的节点
+    int cost;       // 权重
+    int next;       // 模拟指针，初始化为0
+    graphedge() {
+        to = 0, cost = 0, next = 0;
+    }
+};
 
-void addedge(int u, int v) {	// 添加边(u,v)
-	++edgecnt;
-	p[ edgecnt ] = v;
-	next[ edgecnt ] = head[u];
-	head[u] = edgecnt;
-}
+struct graph {
+    int head[N]; // 表示头指针，初始化为0
+    graphedge edge[M<<1];
+    int edgecnt;
 
-// 枚举边的过程，u为起始点
-for (int i = head[u]; i; i = next[i]) {
-	v = p[i];
-	...
-}
+    graph() {
+        memset(head, -1, sizeof(head));
+        edgecnt = 0;
+    }
+
+    void addedge(int from, int to, int cost = 0) {    // 添加边(from, to) cost
+        edge[edgecnt].to = to;
+        edge[edgecnt].cost = cost;
+        edge[edgecnt].next = head[from];
+        head[from] = edgecnt++;
+    }
+
+    void func() {
+        // 枚举边的过程，u为起始点
+        int u = 0;
+        for (int i = head[u]; ~i; i = edge[i].next) {
+            int v = edge[i].to;
+            //
+        }
+    }
+} g;
 */
 
+/*
 // tree
-// struct treenode {
-//     int firstson;
-//     int nextbro;
-//     treenode() : firstson(-1), nextbro(-1) {}
-// };
-
+struct treenode {
+    int firstson;
+    int nextbro;
+    treenode() : firstson(-1), nextbro(-1) {}
+};
+*/
 
 /*
 //hashmap
