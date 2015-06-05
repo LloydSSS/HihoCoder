@@ -19,9 +19,9 @@ using namespace std;
 
 typedef long long ll;
 const double eps = 1e-9;
-const int N = 100010;
-const int M = 100010;
-const int L = 101;
+const int N = 1e5+7;
+const int M = 1e5+7;
+const int L = 1e2+7;
 
 /*
 // Graph
@@ -85,8 +85,10 @@ void solve() {
 }
 
 int main() {
-	freopen("/Users/G/Project/HihoCoder/in.txt", "r", stdin);
-	//freopen("D:/Project/HihoCoder/in.txt", "r", stdin);
+#ifndef ONLINE_JUDGE
+    //freopen("/Users/G/Project/HihoCoder/in.txt", "r", stdin);
+    freopen("D:/Project/HihoCoder/in.txt", "r", stdin);
+#endif
 
 	solve();
 	return 0;
