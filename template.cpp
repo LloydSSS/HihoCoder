@@ -44,6 +44,14 @@ for (int i = head[u]; i; i = next[i]) {
 }
 */
 
+// tree
+// struct treenode {
+//     int firstson;
+//     int nextbro;
+//     treenode() : firstson(-1), nextbro(-1) {}
+// };
+
+
 /*
 //hashmap
 struct hashnode {
