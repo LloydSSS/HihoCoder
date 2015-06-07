@@ -16,14 +16,15 @@ using namespace std;
 #define rep(i,n) for (int i = 0; i < n; ++i)
 #define rep_st(i,s,t) for (int i = s; i < t; ++i)
 #define rrep(i,n) for (int i = n-1; i >= 0; --i)
+#define rrep_st(i,s,t) for (int i = t-1; i >= s; --i)
 
 typedef long long ll;
 const double eps = 1e-9;
-const int N = 1e5+7;
-const int M = 1e5+7;
+const int N = 1e2+7;
+const int M = 1e2+7;
 const int L = 1e2+7;
 
-/*
+
 // Graph
 struct graphedge {
     int to;         // 表示指向的节点
@@ -60,23 +61,49 @@ struct graph {
         }
     }
 } g;
-*/
 
-/*
-// tree
-struct treenode {
-    int firstson;
-    int nextbro;
-    treenode() : firstson(-1), nextbro(-1) {}
-};
-*/
+int n, m;
+int weight[N];
+int ans = 0;
+int f[N][M];
 
-void init() {
+void input() {
+    memset(f, 0, sizeof(f));
 
+    scanf("%d%d", &n, &m);
+    rep (i, n)
+        scanf("%d", &f[i+1][1]);
+    int u, v;
+    rep (i, n-1) {
+        scanf("%d%d", &u, &v);
+        g.addedge(u, v);
+        g.addedge(v, u);
+    }
 }
 
-void solve() {
+void dfs(int fa, int u) {
+    for (int i = g.head[u]; ~i; i = g.edge[i].next) {
+        int v = g.edge[i].to;
+        if (v == fa)
+            continue;
+        dfs(u, v);
+    }
 
+    for (int i = g.head[u]; ~i; i = g.edge[i].next) {
+        int v = g.edge[i].to;
+        if (v == fa)
+            continue;
+        rrep_st (mi, 2, m+1) {
+            rep_st (j, 1, mi) {
+                f[u][mi] = max(f[u][mi], f[u][mi-j] + f[v][j]);
+            }
+        }
+    }
+}
+
+
+void solve() {
+    dfs(0, 1);
 }
 
 int main() {
@@ -88,7 +115,9 @@ int main() {
 #endif
 #endif
 
-    init();
-	solve();
-	return 0;
+    input();
+    solve();
+    printf("%d\n", f[1][m]);
+    return 0;
 }
+
