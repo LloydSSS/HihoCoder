@@ -22,10 +22,19 @@ const int N = 20010;
 
 int p[N];
 int find_p(int x) {
-	if (x != p[x])
-		p[x] = find_p(p[x]);
-	return p[x];
+    if (x != p[x])
+        p[x] = find_p(p[x]);
+    return p[x];
 }
+
+void union1(int x, int y) {
+    p[find_p(x)] = find_p(p[y]);
+}
+
+bool judge(int x, int y) {
+    return find_p(x) == find_p(y);
+}
+
 
 int main() {
     freopen("D:/Project/HihoCoder/in.txt", "r", stdin);

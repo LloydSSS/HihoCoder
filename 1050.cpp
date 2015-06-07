@@ -23,7 +23,7 @@ const int N = 1e5+7;
 const int M = 1e5+7;
 const int L = 1e2+7;
 
-/*
+
 // Graph
 struct graphedge {
     int to;         // 表示指向的节点
@@ -60,23 +60,43 @@ struct graph {
         }
     }
 } g;
-*/
 
-/*
-// tree
-struct treenode {
-    int firstson;
-    int nextbro;
-    treenode() : firstson(-1), nextbro(-1) {}
-};
-*/
+int n;
+int ans = 0;
+bool visited[N];
 
-void init() {
-
+void input() {
+    scanf("%d", &n);
+    int u, v;
+    rep (i, n-1) {
+        scanf("%d%d", &u, &v);
+        g.addedge(u, v);
+        g.addedge(v, u);
+    }
+    memset(visited, 0, sizeof(visited));
 }
 
-void solve() {
+int maxdepth(int u) {
+    if (visited[u])
+        return 0;
+    visited[u] = true;
+    pair<int, int> pr(0, 0);
+    for (int i = g.head[u]; ~i; i = g.edge[i].next) {
+        int v = g.edge[i].to;
+        int dep = maxdepth(v);
+        if (dep > pr.second)
+            pr.second = dep;
+        if (pr.second > pr.first)
+            swap(pr.first, pr.second);
+    }
+    if (pr.first + pr.second > ans)
+        ans = pr.first + pr.second;
+    return pr.first+1;
+}
 
+
+void solve() {
+    maxdepth(1);
 }
 
 int main() {
@@ -88,7 +108,8 @@ int main() {
 #endif
 #endif
 
-    init();
+    input();
 	solve();
+    printf("%d\n", ans);
 	return 0;
 }

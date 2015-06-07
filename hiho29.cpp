@@ -10,6 +10,7 @@
 #include <cmath>
 #include <cstring>
 #include <cstdlib>
+#include <climits>
 #include <utility>
 using namespace std;
 
@@ -20,10 +21,9 @@ using namespace std;
 typedef long long ll;
 const double eps = 1e-9;
 const int N = 1e5+7;
-const int M = 1e5+7;
+const int M = 1e6+7;
 const int L = 1e2+7;
 
-/*
 // Graph
 struct graphedge {
     int to;         // 表示指向的节点
@@ -60,23 +60,48 @@ struct graph {
         }
     }
 } g;
-*/
 
-/*
-// tree
-struct treenode {
-    int firstson;
-    int nextbro;
-    treenode() : firstson(-1), nextbro(-1) {}
-};
-*/
 
-void init() {
+int n, m;
+int ans = 0;
+bool visited[N];
 
+void input() {
+    scanf("%d%d", &n, &m);
+    int u, v, c;
+    rep (i, m) {
+        scanf("%d%d%d", &u, &v, &c);
+        g.addedge(u, v, c);
+        g.addedge(v, u, c);
+    }
+    memset(visited, 0, sizeof(visited));
 }
 
-void solve() {
+struct cmp {
+    bool operator()(pair<int, int> a, pair<int, int> b) {
+        return a.second > b.second;
+    }
+};
 
+void HeapPrim() {
+    priority_queue<pair<int, int>, vector<pair<int, int> >, cmp> pq;
+    pq.push(make_pair(1, 0));
+    while (!pq.empty()) {
+        pair<int, int> pr = pq.top();
+        pq.pop();
+        int u = pr.first;
+        int c = pr.second;
+        if (visited[u])
+            continue;
+        visited[u] = true;
+        ans += c;
+        for (int i = g.head[u]; ~i; i = g.edge[i].next) {
+            int v = g.edge[i].to;
+            if (visited[v])
+                continue;
+            pq.push(make_pair(v, g.edge[i].cost));
+        }
+    }
 }
 
 int main() {
@@ -88,7 +113,8 @@ int main() {
 #endif
 #endif
 
-    init();
-	solve();
-	return 0;
+    input();
+    HeapPrim();
+    printf("%d\n", ans);
+    return 0;
 }

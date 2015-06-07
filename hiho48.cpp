@@ -89,6 +89,6 @@ int main() {
 		deg[b]++;
 	}
 	solve();
-	printf("%d\n", ans);
+	printf("%lld\n", ans);
     return 0;
 }
