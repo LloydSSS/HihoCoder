@@ -27,7 +27,13 @@ bool check(int x, int n) {
 }
 
 int main() {
-    freopen("D:/Baogui/Code/hiho/in.txt", "r", stdin);
+#ifndef ONLINE_JUDGE
+#ifdef __APPLE__
+    freopen("/Users/G/Project/HihoCoder/in.txt", "r", stdin);
+#else
+    freopen("D:/Project/HihoCoder/in.txt", "r", stdin);
+#endif
+#endif
     int t, n;
     scanf("%d", &t);
     while (t--) {
