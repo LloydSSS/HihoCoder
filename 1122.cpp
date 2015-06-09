@@ -1,3 +1,4 @@
+//hiho#1122 : 二分图二•二分图最大匹配之匈牙利算法
 #include <iostream>
 #include <vector>
 #include <string>
@@ -16,11 +17,13 @@ using namespace std;
 int record[1010];
 bool used[1010];
 bool find_path(int x, vector<set<int> > &graph) {
+    //虚线
     for (set<int>::iterator sit = graph[x].begin(); sit != graph[x].end(); sit++) {
         int y = *sit;
         if (used[y] == true)
             continue;
         used[y] = true;
+        //实线
         if (record[y] == 0 || find_path(record[y], graph)) {
             record[y] = x;
             record[x] = y;
@@ -31,7 +34,13 @@ bool find_path(int x, vector<set<int> > &graph) {
 }
 
 int main() {
-    freopen("D:/Baogui/Code/hiho/in.txt", "r", stdin);
+#ifndef ONLINE_JUDGE
+#ifdef __APPLE__
+    freopen("/Users/G/Project/HihoCoder/in.txt", "r", stdin);
+#else
+    freopen("D:/Project/HihoCoder/in.txt", "r", stdin);
+#endif
+#endif
     int n, m, u, v, ans = 0;
     scanf("%d %d", &n, &m);
     vector<set<int> > graph(n+1);

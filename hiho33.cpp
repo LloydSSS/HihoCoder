@@ -1,6 +1,3 @@
-//hiho#1127 : 二分图三·二分图最小点覆盖和最大独立集
-//最小点覆盖的点数 = 二分图最大匹配
-//最大独立集的点数 = 总点数 - 二分图最大匹配
 #include <iostream>
 #include <vector>
 #include <string>
@@ -23,8 +20,9 @@ using namespace std;
 typedef long long ll;
 const double eps = 1e-9;
 const int N = 1e4+7;
-const int M = 1e4+7;
+const int M = 1e5+7;
 const int L = 1e2+7;
+
 
 // Graph
 struct graphedge {
@@ -42,6 +40,10 @@ struct graph {
     int edgecnt;
 
     graph() {
+        init();
+    }
+
+    void init() {
         memset(head, -1, sizeof(head));
         edgecnt = 0;
     }
@@ -53,58 +55,37 @@ struct graph {
         head[from] = edgecnt++;
     }
 
-    void func() {
-        // 枚举边的过程，u为起始点
-        int u = 0;
-        for (int i = head[u]; ~i; i = edge[i].next) {
-            int v = edge[i].to;
-            //
-        }
-    }
 } g;
 
-int n, m;
+int t, n, m;
+bool ans = false;
 int record[N];
-bool visited[N];
-int ans = 0;
-void init() {
-    scanf("%d%d", &n, &m);
-    int u, v;
-    rep (i, m) {
-        scanf("%d%d", &u, &v);
-        g.addedge(u, v);
-        g.addedge(v, u);
-    }
-}
 
-bool find_path(int u) {
+bool paint(int u) {
+    // 枚举边的过程，u为起始点
     for (int i = g.head[u]; ~i; i = g.edge[i].next) {
         int v = g.edge[i].to;
-        if (visited[v])
-            continue;
-        visited[v] = true;
-        if (record[v] == 0 || find_path(record[v])) {
-            record[u] = v;
-            record[v] = u;
-            return true;
-        }
-    }
-    return false;
-}
+        if (record[v] == 0) {
+            record[v] = -record[u];
+            if (!paint(v))
+                return false;
+        } else if (record[v] == record[u])
+            return false;
 
+    }
+    return true;
+}
 void solve() {
     memset(record, 0, sizeof(record));
     rep_st (i, 1, n+1) {
         if (record[i] == 0) {
-            memset(visited, 0, sizeof(visited));
-            find_path(i);
+            record[i] = 1;
+            ans = paint(i);
+            if (!ans) 
+                return;
         }
     }
-    rep_st (i, 1, n+1) {
-        if (record[i] != 0)
-            ans++;
-    }
-    ans = ans/2;
+    ans = true;
 }
 
 int main() {
@@ -116,9 +97,21 @@ int main() {
 #endif
 #endif
 
-    init();
-	solve();
-    printf("%d\n", ans);
-    printf("%d\n", n - ans);
+    scanf("%d", &t);
+    int u, v;
+    while (t--) {
+        scanf("%d%d", &n, &m);
+        g.init();
+        rep (i, m) {
+            scanf("%d%d", &u, &v);
+            g.addedge(u, v);
+            g.addedge(v, u);
+        }
+        solve();
+        if (ans)
+            printf("Correct\n");
+        else
+            printf("Wrong\n");
+    }
 	return 0;
 }
