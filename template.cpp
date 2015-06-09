@@ -88,7 +88,6 @@ int main() {
 #endif
 #endif
 
-    init();
-	solve();
-	return 0;
+    solve();
+    return 0;
 }
