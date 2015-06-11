@@ -1,3 +1,9 @@
+// #1141 : 二分·归并排序之逆序对
+// http://hihocoder.com/problemset/problem/1141
+/*
+    plan A: 归并排序 在merge时计算逆序对
+    plan B: 树状数组
+*/
 #include <iostream>
 #include <vector>
 #include <string>

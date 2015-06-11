@@ -23,8 +23,15 @@ const int N = 1e5+7;
 const int M = 1e5+7;
 const int L = 1e2+7;
 
+// tree
+struct treenode {
+    int firstson;
+    int nextbro;
+    treenode() : firstson(-1), nextbro(-1) {}
+};
+
 void init() {
-	
+
 }
 
 void solve() {

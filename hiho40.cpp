@@ -53,15 +53,9 @@ void solve() {
 }
 
 int main() {
-#ifndef ONLINE_JUDGE
-#ifdef __APPLE__
-    freopen("/Users/G/Project/HihoCoder/in.txt", "r", stdin);
-#else
-    freopen("D:/Project/HihoCoder/in.txt", "r", stdin);
-#endif
-#endif
+    freopen("D:/Baogui/Project/HihoCoder/in.txt", "r", stdin);
     scanf("%lf%lf%lf%lf%lf", &a, &b, &c, &x, &y);
     solve();
-    printf("%.3lf\n", ans+0.0005);
+    printf("%.3lf\n", ans);
     return 0;
 }
