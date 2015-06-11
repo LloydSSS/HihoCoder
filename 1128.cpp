@@ -26,6 +26,17 @@ const int L = 1e2+7;
 int a[N];
 int n, k;
 int ans = -1;
+int partition(int l, int r, int pivot) {
+    while (l < r) {
+        while (a[l] < a[pivot]) l++;
+        swap(a[l], a[pivot]);
+        pivot = l;
+        while (a[r] > a[pivot]) r--;
+        swap(a[r], a[pivot]);
+        pivot = r;
+    }
+    return pivot; 
+}
 void solve() {
     int pos = 0;
     while (pos < n) {
@@ -36,14 +47,22 @@ void solve() {
     if (pos == n)
         return;
 
+    ans = partition(0, n-1, pos) + 1;
+    return;
+
     int l = 0, r = n-1;
+
     while (l < r) {
-        while (a[l] < k) l++;
-        while (a[r] > k) r--;
-        if (l != r)
-	        swap(a[l], a[r]);
+        while (a[l] < a[pos]) l++;
+        if (l != pos)
+            swap(a[l], a[pos]);
+        pos = l;
+        while (a[r] > a[pos]) r--;
+        if (r != pos)
+            swap(a[r], a[pos]);
+        pos = r;
     }
-    ans = l+1;
+    ans = pos+1;
 }
 
 int main() {

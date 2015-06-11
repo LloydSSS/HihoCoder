@@ -7,6 +7,7 @@
 #include <set>
 #include <algorithm>
 #include <cstdio>
+#include <ctime>
 #include <cmath>
 #include <cstring>
 #include <cstdlib>
@@ -26,24 +27,36 @@ const int L = 1e2+7;
 int a[N];
 int n, k;
 int ans = -1;
-void solve() {
-    int pos = 0;
-    while (pos < n) {
-        if (a[pos] == k)
-            break;
-        pos++;
+int partition(int l, int r, int pivot) {
+    while (l < r) {
+        while (a[l] < a[pivot]) l++;
+        swap(a[l], a[pivot]);
+        pivot = l;
+        while (a[r] > a[pivot]) r--;
+        swap(a[r], a[pivot]);
+        pivot = r;
     }
-    if (pos == n)
+    return pivot; 
+}
+
+void solve() {
+    if (k > n)
         return;
 
-    int l = 0, r = n-1;
-    while (l < r) {
-        while (a[l] < k) l++;
-        while (a[r] > k) r--;
-        if (l != r)
-	        swap(a[l], a[r]);
+    srand(time(0));
+    int l = 0, r = n-1, pivot = 0;
+    while (true) {
+        pivot = l + rand()%(r-l+1);
+        pivot = partition(l, r, pivot);
+        if (pivot == k-1)
+            break;
+        if (pivot > k-1)
+            r = pivot-1;
+        else
+            l = pivot+1;
+
     }
-    ans = l+1;
+    ans = a[pivot];
 }
 
 int main() {
@@ -57,7 +70,7 @@ int main() {
 
     scanf("%d%d", &n, &k);
     rep (i, n) scanf("%d", &a[i]);
-	solve();
+    solve();
     printf("%d\n", ans);
-	return 0;
+    return 0;
 }
