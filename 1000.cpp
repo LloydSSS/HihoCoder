@@ -24,11 +24,14 @@ const int M = 1e5+7;
 const int L = 1e2+7;
 
 void init() {
-	
+
 }
 
 void solve() {
-
+    int a, b;
+    while (cin>>a>>b) {
+        cout<<a+b<<endl;
+    }
 }
 
 int main() {
@@ -40,6 +43,7 @@ int main() {
 #endif
 #endif
 
+    init();
     solve();
     return 0;
 }
