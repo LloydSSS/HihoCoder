@@ -77,7 +77,6 @@ int Manacher(string s) {
         }
         if (p[i] > max_len)
             max_len = p[i];
-
     }
     return max_len;
 }
